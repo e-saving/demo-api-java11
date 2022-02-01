@@ -10,7 +10,7 @@
     </parent>
     <groupId>ke.co.ngonyoku</groupId>
     <artifactId>Covid-Track</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <name>Covid-Track</name>
     <description>Covid 19 Tracker app</description>
     <properties>
