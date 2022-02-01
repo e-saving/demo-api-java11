@@ -75,10 +75,11 @@ jobs:
         run: |
           cur_version=$(cat version/version.txt|grep 'CUR_VERSION'|awk -F'=' '{print($2)}')
           echo "Version is ${cur_version}"
-          echo "VERSION_NO=${cur_version} " >> $GITHUB_ENV    
+          echo "VERSION_NO=${cur_version} " >> $GITHUB_ENV 
+          mkdir badges
           
-      - name: Unit Testing
-        run: mvn test -Pcoverage
+      - name: Build with Maven
+        run: mvn package -Pcoverage
       
       - name: Generate JaCoCo badge
         id: jacoco
@@ -89,7 +90,7 @@ jobs:
           generate-summary: true
 
       - run: | 
-          ls -l
+          ls -l target
           ls -l badges
           ls -l target/site/jacoco/
       
@@ -111,15 +112,15 @@ jobs:
           message: 'commit badge'
           add: '*.svg *.json'
 
-      - run: | 
-          ls -l target      
-          ls -l badges
+      #- run: | 
+      #    ls -l target      
+      #    ls -l badges
 
-      - name: Build with Maven
-        run: mvn clean install
+      #- name: Build with Maven
+      #  run: mvn clean install
       
-      - run: | 
-         ls -l target 
+      #- run: | 
+      #   ls -l target 
           
       #- name: Upload build artifact
       #  uses: actions/upload-artifact@v2
