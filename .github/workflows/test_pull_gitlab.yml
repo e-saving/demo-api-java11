@@ -34,7 +34,7 @@ jobs:
           ref: master
           token: ${{ secrets.CHECKOUT_PAT }}
           #token: glpat-LPmN1mkSXb6vtGAUYxfF
-          path: api-demo
+          path: api-demo/templates
 
       - name: Generate new version
         run: | 
