@@ -19,6 +19,10 @@ env:
   CONTAINER_REPO: gableesaving.azurecr.io/api-demo-java11
   POM_VERSION_LINE_NUMBER: 13
   
+  GITOPS_REPO: e-saving/gitops_deployment  
+  GITOPS_MANAGE_BRANCH: master
+  GITOPS_MANAGE_HOME_PATH: api-demo-java11
+  
 jobs:
   generate-version:
     runs-on: ubuntu-latest    
@@ -202,3 +206,69 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ env.MANAGE_BRANCH }}  
+          
+  update-gitops-repo:
+    runs-on: ubuntu-latest    
+    
+    steps:          
+      - name: Download version artifact
+        uses: actions/download-artifact@v1
+        with:
+          name: version
+          
+      - name: Check New Version         
+        run: |
+          new_version=$(cat version/version.txt|grep 'NEW_VERSION'|awk -F'=' '{print($2)}')
+          echo "Version is ${new_version}"
+          echo "VERSION_NO=${new_version} " >> $GITHUB_ENV            
+          
+      - name: Checkout GitOps Repo
+        uses: actions/checkout@v2.4.0
+        with:                  
+          repository: ${{ env.GITOPS_REPO }}       
+          ref: ${{ env.GITOPS_MANAGE_BRANCH }}
+          token: ${{ secrets.CHECKOUT_PAT }}          
+
+      - name: Update new version of container
+        run: | 
+            ls -l
+            cd ${{ env.GITOPS_MANAGE_HOME_PATH }}
+            pwd
+            ls -l
+            image_repo=$(cat values.yaml|grep image|awk -F' ' '{print($2)}')
+            image_val=$(echo $image_repo|awk -F'/' '{print($2)}')            
+            image_name=$(echo $image_val|awk -F':' '{print($1)}')
+            image_tag=$(echo $image_val|awk -F':' '{print($2)}')            
+            echo "image_val=${image_val}"            
+            echo "image_name=${image_name}"
+            echo "image_tag=${image_tag}"
+            new_image_val="${image_name}:${{ env.VERSION_NO }}"
+            sed -i "s/${image_val}/${new_image_val}/g" values.yaml
+            
+      - name: Check new version of container
+        run: | 
+            ls -l
+            cd ${{ env.GITOPS_MANAGE_HOME_PATH }}
+            pwd
+            ls -l
+            image_repo=$(cat values.yaml|grep image|awk -F' ' '{print($2)}')
+            image_val=$(echo $image_repo|awk -F'/' '{print($2)}')            
+            image_name=$(echo $image_val|awk -F':' '{print($1)}')
+            image_tag=$(echo $image_val|awk -F':' '{print($2)}')            
+            echo "image_val=${image_val}"            
+            echo "image_name=${image_name}"
+            echo "image_tag=${image_tag}"   
+         
+      - name: Commit and push the values.yaml
+        uses: dmnemec/copy_file_to_another_repo_action@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.CHECKOUT_PAT }}
+        with:
+          source_file: "${{ env.MANAGE_HOME_PATH }}/values.yaml"
+          destination_repo: ${{ env.GITOPS_REPO }}
+          destination_folder: ${{ env.GITOPS_MANAGE_HOME_PATH }}
+          destination_branch: ${{ env.GITOPS_MANAGE_BRANCH }}
+          user_email: 'github_actions@g-able.com'
+          user_name: 'github_actions'
+          commit_message: 'commit new version ${{ env.VERSION_NO }} of ${{ env.GITOPS_MANAGE_HOME_PATH }}/values.yaml'
+   
