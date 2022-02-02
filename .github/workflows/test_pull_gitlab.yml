@@ -30,9 +30,11 @@ jobs:
         uses: actions/checkout@v2.4.0
         with:        
           #repository: https://github.com/e-saving/gitops_deployment.git
-          repository: e-saving/gitops_deployment
-          ref: master
-          token: ${{ secrets.CHECKOUT_PAT }}
+          #repository: e-saving/gitops_deployment
+          repository: git.g-able.com/ais-esaving/api-demo
+          ref: main
+          #token: ${{ secrets.CHECKOUT_PAT }}
+          token: glpat-LPmN1mkSXb6vtGAUYxfF
 
       - name: Generate new version
         run: | 
