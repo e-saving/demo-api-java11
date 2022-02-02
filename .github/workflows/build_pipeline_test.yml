@@ -265,7 +265,7 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.CHECKOUT_PAT }}
         with:
-          source_file: "${{ env.MANAGE_HOME_PATH }}/values.yaml"
+          source_file: "${{ env.GITOPS_MANAGE_HOME_PATH }}/values.yaml"
           destination_repo: ${{ env.GITOPS_REPO }}
           destination_folder: ${{ env.GITOPS_MANAGE_HOME_PATH }}
           destination_branch: ${{ env.GITOPS_MANAGE_BRANCH }}
