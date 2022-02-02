@@ -32,7 +32,7 @@ jobs:
           repository: e-saving/gitops_deployment          
           ref: master
           token: ${{ secrets.CHECKOUT_PAT }}
-          path: api-demo-java11/templates
+          path: api-demo-java11/
 
       - name: Generate new version
         run: | 
@@ -50,11 +50,7 @@ jobs:
             #echo NEW_VERSION=${new_version} >> version/version.txt
             #sed -i ${{ env.POM_VERSION_LINE_NUMBER }}"s/<version>${cur_version}<\/version>/<version>${new_version}<\/version>/" pom.xml  
             #cp pom.xml version/
-            
-      - name: Test GitLab
-        run: |
-          git clone https://006218:glpat-LPmN1mkSXb6vtGAUYxfF@git.g-able.com/ais-esaving/service-a.git
-          ls -l
+
             
       #- name: Upload version artifact
       #  uses: actions/upload-artifact@v1
