@@ -64,7 +64,14 @@ jobs:
             echo "image_name=${image_name}"
             echo "image_tag=${image_tag}"   
 
-            
+      - name: Commit and push the values.yaml
+        uses: EndBug/add-and-commit@v7
+        with:
+          default_author: github_actions
+          message: 'commit new version of values.yaml'
+          add: "${{ env.MANAGE_HOME_PATH }}/values.yaml"
+          
+          
       #- name: Upload version artifact
       #  uses: actions/upload-artifact@v1
       #  with:
