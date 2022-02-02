@@ -31,7 +31,8 @@ jobs:
         with:        
           #repository: https://github.com/e-saving/gitops_deployment.git
           repository: e-saving/gitops_deployment
-          ref: master        
+          ref: master
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Generate new version
         run: | 
