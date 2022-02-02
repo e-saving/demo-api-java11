@@ -209,6 +209,7 @@ jobs:
           
   update-gitops-repo:
     runs-on: ubuntu-latest    
+    needs: [build-container]
     
     steps:          
       - name: Download version artifact
