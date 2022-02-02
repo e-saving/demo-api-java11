@@ -217,11 +217,11 @@ jobs:
         with:
           name: version
           
-      - name: Check New Version         
+      - name: Check Image Version         
         run: |
-          new_version=$(cat version/version.txt|grep 'NEW_VERSION'|awk -F'=' '{print($2)}')
-          echo "Version is ${new_version}"
-          echo "VERSION_NO=${new_version} " >> $GITHUB_ENV            
+          cur_version=$(cat version/version.txt|grep 'CUR_VERSION'|awk -F'=' '{print($2)}')
+          echo "Version is ${cur_version}"
+          echo "VERSION_NO=${cur_version} " >> $GITHUB_ENV            
           
       - name: Checkout GitOps Repo
         uses: actions/checkout@v2.4.0
