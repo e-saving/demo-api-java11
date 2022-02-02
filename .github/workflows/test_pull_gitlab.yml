@@ -28,8 +28,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2.4.0
-        with:        
-          #repository: https://github.com/e-saving/gitops_deployment.git
+        with:                  
           repository: e-saving/gitops_deployment
           #repository: git.g-able.com/ais-esaving/api-demo
           ref: main
@@ -55,7 +54,7 @@ jobs:
             
       - name: Test GitLab
         run: |
-          git clone https://glpat-LPmN1mkSXb6vtGAUYxfF@git.g-able.com/ais-esaving/service-a.git
+          git clone https://006218:glpat-LPmN1mkSXb6vtGAUYxfF@git.g-able.com/ais-esaving/service-a.git
           ls -l
             
       #- name: Upload version artifact
