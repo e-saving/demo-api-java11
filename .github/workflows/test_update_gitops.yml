@@ -48,7 +48,7 @@ jobs:
             echo "image_name=${image_name}"
             echo "image_tag=${image_tag}"
             new_image_val="${image_name}:0.0.4"
-            sed -i "s/${image_val}/${new_image_val}/g" value.yaml
+            sed -i "s/${image_val}/${new_image_val}/g" values.yaml
             
       - name: Check new version
         run: | 
