@@ -47,9 +47,22 @@ jobs:
             echo "image_val=${image_val}"            
             echo "image_name=${image_name}"
             echo "image_tag=${image_tag}"
+            new_image_val="${image_name}:0.0.4"
+            sed -i "s/${image_val}/${new_image_val}/g" value.yaml
             
-            #sed -i ${{ env.POM_VERSION_LINE_NUMBER }}"s/<version>${cur_version}<\/version>/<version>${new_version}<\/version>/" pom.xml  
-            
+      - name: Check new version
+        run: | 
+            ls -l
+            cd ${{ env.MANAGE_HOME_PATH }}
+            pwd
+            ls -l
+            image_repo=$(cat values.yaml|grep image|awk -F' ' '{print($2)}')
+            image_val=$(echo $image_repo|awk -F'/' '{print($2)}')            
+            image_name=$(echo $image_val|awk -F':' '{print($1)}')
+            image_tag=$(echo $image_val|awk -F':' '{print($2)}')            
+            echo "image_val=${image_val}"            
+            echo "image_name=${image_name}"
+            echo "image_tag=${image_tag}"   
 
             
       #- name: Upload version artifact
