@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Test Pull GitLab
+name: Test Update GitOps Repo
 
 on:          
   push:
@@ -29,12 +29,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.4.0
         with:                  
-          repository: e-saving/gitops_deployment
-          #repository: git.g-able.com/ais-esaving/api-demo
+          repository: e-saving/gitops_deployment          
           ref: master
           token: ${{ secrets.CHECKOUT_PAT }}
-          #token: glpat-LPmN1mkSXb6vtGAUYxfF
-          path: api-demo/templates
+          path: api-demo-java11/templates
 
       - name: Generate new version
         run: | 
