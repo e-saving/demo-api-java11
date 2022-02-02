@@ -31,9 +31,10 @@ jobs:
         with:                  
           repository: e-saving/gitops_deployment
           #repository: git.g-able.com/ais-esaving/api-demo
-          ref: main
+          ref: master
           token: ${{ secrets.CHECKOUT_PAT }}
           #token: glpat-LPmN1mkSXb6vtGAUYxfF
+          path: api-demo
 
       - name: Generate new version
         run: | 
