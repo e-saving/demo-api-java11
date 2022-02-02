@@ -19,6 +19,7 @@ env:
   ARTIFACT_NAME: api-demo-java11
   CONTAINER_REGISTRY : gableesaving.azurecr.io
   CONTAINER_REPO: gableesaving.azurecr.io/api-demo-java11
+  MANAGE_HOME_PATH : api-demo-java11
   POM_VERSION_LINE_NUMBER: 13
   
 jobs:
@@ -32,10 +33,12 @@ jobs:
           repository: e-saving/gitops_deployment          
           ref: master
           token: ${{ secrets.CHECKOUT_PAT }}
-          path: api-demo-java11/
+          path: ${{ env.MANAGE_HOME_PATH }}
 
       - name: Generate new version
         run: | 
+            ls -l
+            cd ${{ env.MANAGE_HOME_PATH }}
             ls -l
             #cur_version=$(head -${{ env.POM_VERSION_LINE_NUMBER }} pom.xml|tail -1|grep -oPm1 "(?<=<version>)[^<]+")
             #echo "cur_version=${cur_version}"
