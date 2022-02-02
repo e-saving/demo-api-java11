@@ -38,20 +38,18 @@ jobs:
         run: | 
             ls -l
             cd ${{ env.MANAGE_HOME_PATH }}
+            pwd
             ls -l
-            #cur_version=$(head -${{ env.POM_VERSION_LINE_NUMBER }} pom.xml|tail -1|grep -oPm1 "(?<=<version>)[^<]+")
-            #echo "cur_version=${cur_version}"
-            #major_version=$(echo ${cur_version}|awk -F'.' '{print($1)}')
-            #minor_version=$(echo ${cur_version}|awk -F'.' '{print($2)}')
-            #build_version=$(echo ${cur_version}|awk -F'.' '{print($3)}')
-            #((new_build_version=build_version+1))
-            #new_version=${major_version}.${minor_version}.${new_build_version}
-            #echo "new_version=${new_version}"
-            #mkdir version
-            #echo CUR_VERSION=${cur_version} > version/version.txt
-            #echo NEW_VERSION=${new_version} >> version/version.txt
+            image_repo=$(cat values.yaml|grep image|awk -F' ' '{print($2)}')
+            image_val=$(echo $image_repo|awk -F'/' '{print($2)}')            
+            image_name=$(echo $image_val|awk -F':' '{print($1)}')
+            image_tag=$(echo $image_val|awk -F':' '{print($2)}')            
+            echo "image_val=${image_val}"            
+            echo "image_name=${image_name}"
+            echo "image_tag=${image_tag}"
+            
             #sed -i ${{ env.POM_VERSION_LINE_NUMBER }}"s/<version>${cur_version}<\/version>/<version>${new_version}<\/version>/" pom.xml  
-            #cp pom.xml version/
+            
 
             
       #- name: Upload version artifact
