@@ -17,9 +17,10 @@ env:
   SOURCECODE_MANAGE_BRANCH: master
   SOURCECODE_HOME_PATH: api-demo-java11
   #GITLAB_REPO: git.g-able.com/ais-esaving/service-a.git
-  
-  
+    
   POM_VERSION_LINE_NUMBER: 13
+  
+  SONAR_PROJECT_KEY: api-demo-java11
   
   DOCKER_IMAGE_NAME: api-demo-java11
   
@@ -147,7 +148,7 @@ jobs:
       - name: Scan Source Code Quality (SonarQube)
         run: |
             cd ${{ env.SOURCECODE_HOME_PATH }}
-            mvn sonar:sonar -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+            mvn sonar:sonar -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }} -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} -Dsonar.login=${{ secrets.SONAR_TOKEN }}
       
       - name: Check Code Quality Gate (SonarQube)
         uses: SonarSource/sonarqube-quality-gate-action@v1.0.0
