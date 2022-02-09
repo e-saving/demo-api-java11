@@ -31,7 +31,7 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Test Call Composite Action
-        uses: birdtest-template-cicd/CompositeAction@main
+        uses: e-saving/birdtest-template-cicd/CompositeAction@main
         with: 
           param_1: "Test Param1"
           param_2: "Test Param2"
