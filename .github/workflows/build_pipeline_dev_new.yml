@@ -29,14 +29,14 @@ env:
   
   
 jobs:
-  generate-version:
+  build:
     runs-on: ubuntu-latest
     environment: develop
     
     steps:
       - name: "Prepare Configuration" 
         uses: e-saving/birdtest-template-cicd/Dev/PrepareConfigurationAction@main
-        id: test
+        #id: test
         with:
           gitops_repo: ${{ secrets.GITOPS_REPO_DEV }}
           gitops_manage_branch: ${{ env.GITOPS_MANAGE_BRANCH }}
@@ -45,6 +45,15 @@ jobs:
           sourcecode_manage_branch: ${{ env.SOURCECODE_MANAGE_BRANCH }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
       
-
+      - name: "Build Container" 
+        uses: e-saving/birdtest-template-cicd/Dev/BuildContainerAction@main
+        #id: test
+        with:
+          gitops_repo: ${{ secrets.GITOPS_REPO_DEV }}
+          gitops_manage_branch: ${{ env.GITOPS_MANAGE_BRANCH }}
+          gitops_token: ${{ secrets.GITOPS_TOKEN }}
+          gitops_app_name: ${{ env.GITOPS_APP_NAME }}
+          sourcecode_manage_branch: ${{ env.SOURCECODE_MANAGE_BRANCH }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
     
      
