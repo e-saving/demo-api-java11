@@ -55,5 +55,6 @@ jobs:
           gitops_app_name: ${{ env.GITOPS_APP_NAME }}
           sourcecode_manage_branch: ${{ env.SOURCECODE_MANAGE_BRANCH }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
-    
+          acr_user: ${{ secrets.ACR_DEV_USERNAME }}
+          acr_password: ${{ secrets.ACR_DEV_PASSWORD }}
      
