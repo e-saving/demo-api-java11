@@ -55,3 +55,9 @@ jobs:
         uses: e-saving/birdtest-template-cicd/Dev/BuildContainerAction@main
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: "Update Deployment Configuration (Helm)" 
+        uses: e-saving/birdtest-template-cicd/Dev/UpdateDeploymentConfigAction@main
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          gitops_token: ${{ secrets.GITOPS_TOKEN }}
