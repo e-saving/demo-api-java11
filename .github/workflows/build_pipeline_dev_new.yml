@@ -30,6 +30,7 @@ jobs:
       - name: "Setup Variable" 
         uses: e-saving/birdtest-template-cicd/Dev/SetupVariableAction@main
         with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}  
           gitops_repo: ${{ secrets.GITOPS_REPO_DEV }}
           gitops_manage_branch: ${{ env.GITOPS_MANAGE_BRANCH }}
           gitops_token: ${{ secrets.GITOPS_TOKEN }}  
