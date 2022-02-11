@@ -41,3 +41,8 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           gitops_token: ${{ secrets.GITOPS_TOKEN }}
 
+      - name: "Build and Unit Test" 
+        uses: e-saving/birdtest-template-cicd/Dev/BuildTestCodeAction@main
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
