@@ -33,4 +33,11 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           gitops_token: ${{ secrets.GITOPS_TOKEN }}
           gitops_manage_branch: ${{ env.GITOPS_MANAGE_BRANCH }}
+          sourcecode_manage_branch: ${{ env.SOURCECODE_MANAGE_BRANCH }}
+          
+      - name: "Prepare Configuration" 
+        uses: e-saving/birdtest-template-cicd/Dev/PrepareConfigurationAction@main
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          gitops_token: ${{ secrets.GITOPS_TOKEN }}
 
