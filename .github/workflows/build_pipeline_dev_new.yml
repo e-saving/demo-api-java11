@@ -61,3 +61,10 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           gitops_token: ${{ secrets.GITOPS_TOKEN }}
+          
+      - name: "Complete Notification" 
+        uses: e-saving/birdtest-template-cicd/Dev/NotificationAction@main
+        if: ${{ success() }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          notify_mesg: "Build Pipeline to Develop Complete with version ${{ env.POM_VERSION }}"
