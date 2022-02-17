@@ -6,10 +6,10 @@ FROM openjdk:11.0.1-jdk-slim
 #ARG JAR_FILE=target/Covid-Track-0.0.1-SNAPSHOT.jar
 
 # cd /opt/app
-WORKDIR /opt/app
+WORKDIR /app
 
 # cp target/spring-boot-web.jar /opt/app/app.jar
-COPY target/*.jar app.jar
+COPY target/*.jar /app/app.jar
 
 # java -jar /opt/app/app.jar
-ENTRYPOINT ["java","-jar","app.jar","--server.port=80"]
+ENTRYPOINT ["java","-jar","app.jar"]
